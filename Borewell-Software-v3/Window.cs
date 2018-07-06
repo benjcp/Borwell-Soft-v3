@@ -10,9 +10,9 @@ namespace Borewell_Software_v3
     public class Window:Measurements
     {
  
+        //Use the width and height from the Measurements 
         public Window(decimal height, decimal width)
         {
-            // Use height and width from measurements
             Height = height;
             Width = width;
         }

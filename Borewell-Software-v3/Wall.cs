@@ -10,17 +10,30 @@ namespace Borewell_Software_v3
     class Wall:Window
     {
 
-        public Window window { get; set; }
+        public List<Window> Windows { get; set; }
 
+        //Use the width and height from the Measurements
         public Wall(decimal height, decimal width):base(width, height)
         {
             height = Height;
             width = Width;
         }
 
+        //Calculates the total area of the wall with or without windows
         public decimal calcWallArea()
         {
-            return (Height * Width) - window.WindowArea();
+            if(Windows != null)
+            {
+                decimal winarea = new decimal();
+
+                foreach(Window win in Windows)
+                {
+                    winarea += win.WindowArea();
+                }
+
+                return (Height * Width) - winarea;
+            }
+            return (Height * Width);
         }
     }
 }
