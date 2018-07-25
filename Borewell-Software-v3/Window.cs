@@ -11,17 +11,16 @@ namespace Borewell_Software_v3
     {
  
         //Use the width and height from the Measurements 
-        public Window(decimal height, decimal width)
+        public Window(decimal windowWidth, decimal windowHeight)
         {
-            Height = height;
-            Width = width;
+            Height = windowHeight;
+            Width = windowWidth;
         }
 
         //calculate the area of the window
-        public decimal WindowArea()
+        public decimal calcWindowArea()
         {
             return Height * Width;
         }
-
     }
 }
