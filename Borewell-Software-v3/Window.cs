@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Borewell_Software_v3
 {
@@ -20,7 +16,8 @@ namespace Borewell_Software_v3
         //calculate the area of the window
         public decimal calcWindowArea()
         {
-            return Height * Width;
+            try { return Height * Width; }
+            catch { throw new ArgumentException("Please enter a valid input for a window"); }
         }
     }
 }

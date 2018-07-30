@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Borewell_Software_v3
 {
     //Class for each Wall, uses Window as it's inherited class as walls can have windows and can use measurements
-    class Wall:Window
+    class Wall :Window
     {
 
         public List<Window> Windows { get; set; }
@@ -19,19 +20,16 @@ namespace Borewell_Software_v3
         public decimal calcWallArea()
         {
             decimal winarea = new decimal();
+            //calculate the total area of windows
 
-            if (Windows != null)
-            {
-                //calculate the total area of windows
-                foreach(Window win in Windows)
-                {
-                    winarea += win.calcWindowArea();
-                }
-                //calculate area of wall minus windows
-                return (Height * Width) - winarea;
-            }
-            //calculate area of wall
-            return (Height * Width);
+            foreach (Window win in Windows)
+            { winarea += win.calcWindowArea(); }
+
+            //calculate area of wall minus windows
+            try
+            { return (Height * Width) - winarea; }
+            catch
+            { throw new ArgumentException("Please enter a valid input for walls"); }
         }
     }
 }

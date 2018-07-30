@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Borewell_Software_v3
 {
@@ -19,13 +20,19 @@ namespace Borewell_Software_v3
         //Calculates the volume of the room
         public decimal calcRoomVolume()
         {
-            return (Height * Width) * Length;
+            try
+            { return (Height * Width) * Length; }
+            catch
+            { throw new ArgumentException("Please enter a valid input for a room"); }
         }
 
         //Calculate the area of the floor
         public decimal calcFloorArea()
         {
-            return (Width * Length);
+            try
+            { return (Width * Length); }
+            catch
+            { throw new ArgumentException("Please enter a valid input for floor values"); }
         }
 
         //Calculate the amount of paint required to paint the room
@@ -33,19 +40,27 @@ namespace Borewell_Software_v3
         {
             decimal surfaceArea = new decimal();
 
-            if(Walls != null)
+            //calculate the surface area of the room
+            foreach (Wall wall in Walls)
             {
-                //calculate the surface area of the room
-                foreach(Wall wall in Walls)
-                {
-                    surfaceArea += wall.calcWallArea();
-                }
-                //calculate the total paint required (In Liters)
-                return (surfaceArea * coats) / 10;
+                surfaceArea += wall.calcWallArea();
             }
-            else
+            //calculate the total paint required (In Liters)
+            try
             {
-               return 0;
+                //if the required paint is less than 0 or invalid data entered, throw an error
+                decimal Paint = (surfaceArea * coats) / 10;
+
+                if (Paint > 0)
+                { return Paint; }
+                else if (Paint <= 0)
+                { return Paint; }
+                else
+                { throw new ArgumentException("required paint must be more than 0"); }
+            }
+            catch
+            {
+                throw new ArgumentException("Please enter valid input for required paint");
             }
         }
     }
